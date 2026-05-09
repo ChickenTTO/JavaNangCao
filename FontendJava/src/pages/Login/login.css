@@ -1,0 +1,125 @@
+* {
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box;
+}
+
+.login{
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.dashboard{
+  height: 670px;
+  width: 630px;
+  background-color: rgba(160, 158, 158, 0.25);  
+  backdrop-filter: blur(10px);              
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard h1{
+  padding-top: 64px;
+  text-align: center;
+}
+
+.input-login{
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  width: 100%;
+}
+
+.input-login input{
+  background-color: transparent;
+  border: 1px solid rgba(246, 244, 244, 0.4);
+  color: white;
+  width: 100%;
+  padding: 15px 45px 15px 20px;
+  font-size: 16px;
+  border-radius: 50px;
+  outline: none;
+}
+
+.input-login input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+  opacity: 1; 
+}
+
+.input-login-user, .input-login-pass {
+  position: relative;
+  width: 400px;
+}
+
+.input-login-user svg, .input-login-pass svg {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+}
+
+.under-content{
+  padding-top: 44px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.check-box{
+  display: flex;
+  gap: 8px;
+}
+
+.button-login{
+  padding-top: 52px;
+  display: flex;
+  justify-content: center;
+}
+
+.button-login button{
+  width: 100%;
+  padding: 13px 24px;
+  border-radius: 25px;
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.button-login button:hover{
+  opacity: 0.85;
+}
+
+.no-account{
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  font-size: 125%;
+}
+
+.no-account span{
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-left: 4px;
+}
+
+.no-account span:hover{
+  opacity: 0.8;
+}
+
