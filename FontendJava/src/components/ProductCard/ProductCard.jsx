@@ -2,12 +2,19 @@ import React, { useState } from "react";
 import "./ProductCard.css";
 import { FaHeart, FaShoppingCart, FaBolt } from "react-icons/fa";
 import { useCart } from "../../context/CartContext";
+import { useFavorite } from "../../context/FavoriteContext";
 
 function ProductCard({ id, image, name, price, originalPrice, discount, sold }) {
-  const [liked, setLiked] = useState(false);
   const [cartMsg, setCartMsg] = useState(false);
   const [buyMsg, setBuyMsg] = useState(false);
   const { addToCart } = useCart();
+  const { isFavorite, toggleFavorite } = useFavorite();
+
+  const isLiked = isFavorite(id);
+
+  const handleFavorite = () => {
+    toggleFavorite({ id, image, name, price, originalPrice, discount, sold });
+  };
 
   const handleCart = () => {
     addToCart({ id, name, price, image });
@@ -30,8 +37,8 @@ function ProductCard({ id, image, name, price, originalPrice, discount, sold }) 
 
         <div className="product-actions">
           <button
-            className={`action-btn favorite-btn ${liked ? "liked" : ""}`}
-            onClick={() => setLiked(!liked)}
+            className={`action-btn favorite-btn ${isLiked ? "liked" : ""}`}
+            onClick={handleFavorite}
             title="Yêu thích"
           >
             <FaHeart />

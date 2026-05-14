@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
+import { FavoriteProvider } from "./context/FavoriteContext";
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/signUp";
 import DashboardLayout from "./layouts/DashboardLayout";
@@ -7,6 +8,7 @@ import Menu from "./pages/Dashboard/Menu/menu";
 import AboutUs from "./pages/Dashboard/AboutUs/aboutUs";
 import Contact from "./pages/Dashboard/Contact/contact";
 import Cart from "./pages/Dashboard/Cart/cart";
+import Favorite from "./pages/Dashboard/Favorite/favorite";
 
 import MenClothes from "./pages/Dashboard/Category/MenClothes";
 import WomanClothes from "./pages/Dashboard/Category/WomanClothes";
@@ -19,8 +21,9 @@ import Furniture from "./pages/Dashboard/Category/Furniture";
 
 function App() {
   return (
-    <CartProvider>
-      <BrowserRouter>
+    <FavoriteProvider>
+      <CartProvider>
+        <BrowserRouter>
         <Routes>
           {/* Auth pages - không có header */}
           <Route path="/" element={<Navigate to="/login" replace />} />
@@ -37,6 +40,7 @@ function App() {
             <Route path="/dashboard/about" element={<AboutUs />} />
             <Route path="/dashboard/contact" element={<Contact />} />
             <Route path="/dashboard/cart" element={<Cart />} />
+            <Route path="/dashboard/favorite" element={<Favorite />} />
 
             {/* Category pages */}
             <Route
@@ -60,6 +64,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </CartProvider>
+  </FavoriteProvider>
   );
 }
 

@@ -1,11 +1,13 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaSearch, FaShoppingCart } from "react-icons/fa";
+import { FaSearch, FaShoppingCart, FaHeart } from "react-icons/fa";
 import { useCart } from "../../context/CartContext";
+import { useFavorite } from "../../context/FavoriteContext";
 import "./header.css";
 
 function Header() {
   const navigate = useNavigate();
   const { totalItems } = useCart();
+  const { totalFavorites } = useFavorite();
 
   return (
     <header className="header">
@@ -39,6 +41,16 @@ function Header() {
               className={({ isActive }) => (isActive ? "active" : "")}
             >
               Contact
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/favorite"
+              className={({ isActive }) => (isActive ? "active cart-link" : "cart-link")}
+            >
+              <FaHeart className="cart-icon" />
+              Favorite
+              {totalFavorites > 0 && <span className="cart-badge">{totalFavorites}</span>}
             </NavLink>
           </li>
           <li>
