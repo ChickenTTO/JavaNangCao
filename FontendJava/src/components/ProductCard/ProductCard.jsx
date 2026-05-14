@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import "./ProductCard.css";
 import { FaHeart, FaShoppingCart, FaBolt } from "react-icons/fa";
+import { useCart } from "../../context/CartContext";
 
-function ProductCard({ image, name, price, originalPrice, discount, sold }) {
+function ProductCard({ id, image, name, price, originalPrice, discount, sold }) {
   const [liked, setLiked] = useState(false);
   const [cartMsg, setCartMsg] = useState(false);
   const [buyMsg, setBuyMsg] = useState(false);
+  const { addToCart } = useCart();
 
   const handleCart = () => {
+    addToCart({ id, name, price, image });
     setCartMsg(true);
     setTimeout(() => setCartMsg(false), 1500);
   };
 
   const handleBuy = () => {
+    addToCart({ id, name, price, image });
     setBuyMsg(true);
     setTimeout(() => setBuyMsg(false), 1500);
   };

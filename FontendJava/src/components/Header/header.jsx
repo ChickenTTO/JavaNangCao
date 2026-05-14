@@ -1,9 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaShoppingCart } from "react-icons/fa";
+import { useCart } from "../../context/CartContext";
 import "./header.css";
 
 function Header() {
   const navigate = useNavigate();
+  const { totalItems } = useCart();
+
   return (
     <header className="header">
       {/* Logo */}
@@ -41,9 +44,11 @@ function Header() {
           <li>
             <NavLink
               to="/dashboard/cart"
-              className={({ isActive }) => (isActive ? "active" : "")}
+              className={({ isActive }) => (isActive ? "active cart-link" : "cart-link")}
             >
+              <FaShoppingCart className="cart-icon" />
               Cart
+              {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
             </NavLink>
           </li>
         </ul>
