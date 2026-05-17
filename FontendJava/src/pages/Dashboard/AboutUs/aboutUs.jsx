@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaBullseye, FaEye, FaUsers, FaLeaf } from "react-icons/fa";
 import phongImg from "../../../assets/image/Screenshot 2026-05-14 222511.png";
 import datImg from "../../../assets/image/dat.png";
@@ -6,6 +6,18 @@ import duyenImg from "../../../assets/image/duyen.png";
 import "./aboutUs.css";
 
 function AboutUs() {
+  // Test gọi API từ Backend E-Commerce-Quarkus
+  useEffect(() => {
+    fetch("http://localhost:9000/api/v1/products")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Dữ liệu danh sách sản phẩm lấy từ Backend Quarkus:", data);
+      })
+      .catch((error) => {
+        console.error("Lỗi khi gọi API Backend:", error);
+      });
+  }, []);
+
   return (
     <div className="about-page">
       {/* Hero Section */}

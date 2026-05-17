@@ -4,7 +4,10 @@ import { FaHeart, FaShoppingCart, FaBolt } from "react-icons/fa";
 import { useCart } from "../../context/CartContext";
 import { useFavorite } from "../../context/FavoriteContext";
 
+import { useNavigate } from "react-router-dom";
+
 function ProductCard({ id, image, name, price, originalPrice, discount, sold }) {
+  const navigate = useNavigate();
   const [cartMsg, setCartMsg] = useState(false);
   const [buyMsg, setBuyMsg] = useState(false);
   const { addToCart } = useCart();
@@ -29,7 +32,7 @@ function ProductCard({ id, image, name, price, originalPrice, discount, sold }) 
   };
 
   return (
-    <div className="product-card">
+    <div className="product-card" onClick={() => navigate(`/dashboard/product/${id}`)} style={{ cursor: "pointer" }}>
       {/* ===== ẢNH + OVERLAY ICONS ===== */}
       <div className="product-image-wrapper">
         <img src={image} alt={name} className="product-img" />
@@ -38,7 +41,7 @@ function ProductCard({ id, image, name, price, originalPrice, discount, sold }) 
         <div className="product-actions">
           <button
             className={`action-btn favorite-btn ${isLiked ? "liked" : ""}`}
-            onClick={handleFavorite}
+            onClick={(e) => { e.stopPropagation(); handleFavorite(); }}
             title="Yêu thích"
           >
             <FaHeart />
@@ -47,7 +50,7 @@ function ProductCard({ id, image, name, price, originalPrice, discount, sold }) 
 
           <button
             className={`action-btn cart-btn ${cartMsg ? "active-flash" : ""}`}
-            onClick={handleCart}
+            onClick={(e) => { e.stopPropagation(); handleCart(); }}
             title="Thêm vào giỏ"
           >
             <FaShoppingCart />
@@ -56,7 +59,7 @@ function ProductCard({ id, image, name, price, originalPrice, discount, sold }) 
 
           <button
             className={`action-btn buy-btn ${buyMsg ? "active-flash" : ""}`}
-            onClick={handleBuy}
+            onClick={(e) => { e.stopPropagation(); handleBuy(); }}
             title="Mua ngay"
           >
             <FaBolt />

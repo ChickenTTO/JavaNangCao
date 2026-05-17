@@ -54,16 +54,16 @@ function Cart() {
                   </td>
                   <td className="quantity-col">
                     <div className="quantity-controls">
-                      <button onClick={() => updateQuantity(item.id, -1)}>-</button>
+                      <button onClick={() => updateQuantity(item.cartItemId, -1, item.quantity)}>-</button>
                       <span>{item.quantity}</span>
-                      <button onClick={() => updateQuantity(item.id, 1)}>+</button>
+                      <button onClick={() => updateQuantity(item.cartItemId, 1, item.quantity)}>+</button>
                     </div>
                   </td>
                   <td className="subtotal-col">
                     {(item.price * item.quantity).toLocaleString('vi-VN')}đ
                   </td>
                   <td className="action-col">
-                    <button className="btn-remove" onClick={() => removeFromCart(item.id)}>
+                    <button className="btn-remove" onClick={() => removeFromCart(item.cartItemId)}>
                       <FaTrash />
                     </button>
                   </td>
@@ -88,7 +88,7 @@ function Cart() {
             <span>Tổng cộng:</span>
             <span>{totalPrice.toLocaleString('vi-VN')}đ</span>
           </div>
-          <button className="btn-checkout">
+          <button className="btn-checkout" onClick={() => navigate('/dashboard/checkout')}>
             Tiến hành thanh toán
           </button>
           <button className="btn-continue-shopping-outline" onClick={() => navigate('/dashboard/menu')}>

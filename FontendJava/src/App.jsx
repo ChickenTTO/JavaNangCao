@@ -9,15 +9,15 @@ import AboutUs from "./pages/Dashboard/AboutUs/aboutUs";
 import Contact from "./pages/Dashboard/Contact/contact";
 import Cart from "./pages/Dashboard/Cart/cart";
 import Favorite from "./pages/Dashboard/Favorite/favorite";
+import ProtectedRoute from "./components/ProtectedRoute";
+import AdminLayout from "./layouts/AdminLayout";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+import CategoryManagement from "./pages/Admin/CategoryManagement";
+import ProductManagement from "./pages/Admin/ProductManagement";
 
-import MenClothes from "./pages/Dashboard/Category/MenClothes";
-import WomanClothes from "./pages/Dashboard/Category/WomanClothes";
-import MobilePhone from "./pages/Dashboard/Category/MobilePhone";
-import Computer from "./pages/Dashboard/Category/Computer";
-import Sport from "./pages/Dashboard/Category/Sport";
-import Beauty from "./pages/Dashboard/Category/Beauty";
-import Shoes from "./pages/Dashboard/Category/Shoes";
-import Furniture from "./pages/Dashboard/Category/Furniture";
+import CategoryPage from "./pages/Dashboard/Category/CategoryPage";
+import ProductDetail from "./pages/Dashboard/Product/ProductDetail";
+import Checkout from "./pages/Dashboard/Checkout/Checkout";
 
 function App() {
   return (
@@ -30,36 +30,34 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
 
-          {/* Dashboard pages - có header chung */}
-          <Route element={<DashboardLayout />}>
-            <Route
-              path="/dashboard"
-              element={<Navigate to="/dashboard/menu" replace />}
-            />
-            <Route path="/dashboard/menu" element={<Menu />} />
-            <Route path="/dashboard/about" element={<AboutUs />} />
-            <Route path="/dashboard/contact" element={<Contact />} />
-            <Route path="/dashboard/cart" element={<Cart />} />
-            <Route path="/dashboard/favorite" element={<Favorite />} />
+          {/* Dashboard pages - có header chung, dành cho USER */}
+          <Route element={<ProtectedRoute requiredRole="USER" />}>
+            <Route element={<DashboardLayout />}>
+              <Route
+                path="/dashboard"
+                element={<Navigate to="/dashboard/menu" replace />}
+              />
+              <Route path="/dashboard/menu" element={<Menu />} />
+              <Route path="/dashboard/about" element={<AboutUs />} />
+              <Route path="/dashboard/contact" element={<Contact />} />
+              <Route path="/dashboard/cart" element={<Cart />} />
+              <Route path="/dashboard/checkout" element={<Checkout />} />
+              <Route path="/dashboard/favorite" element={<Favorite />} />
 
-            {/* Category pages */}
-            <Route
-              path="/dashboard/category/men-clothes"
-              element={<MenClothes />}
-            />
-            <Route
-              path="/dashboard/category/woman-clothes"
-              element={<WomanClothes />}
-            />
-            <Route
-              path="/dashboard/category/mobile-phone"
-              element={<MobilePhone />}
-            />
-            <Route path="/dashboard/category/computer" element={<Computer />} />
-            <Route path="/dashboard/category/sport" element={<Sport />} />
-            <Route path="/dashboard/category/beauty" element={<Beauty />} />
-            <Route path="/dashboard/category/shoes" element={<Shoes />} />
-            <Route path="/dashboard/category/furniture" element={<Furniture />} />
+              {/* Category & Product pages */}
+              <Route path="/dashboard/category/:slug" element={<CategoryPage />} />
+              <Route path="/dashboard/product/:id" element={<ProductDetail />} />
+            </Route>
+          </Route>
+
+          {/* Admin pages - dành riêng cho ADMIN */}
+          <Route element={<ProtectedRoute requiredRole="ADMIN" />}>
+            <Route element={<AdminLayout />}>
+              <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route path="/admin/categories" element={<CategoryManagement />} />
+              <Route path="/admin/products" element={<ProductManagement />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
